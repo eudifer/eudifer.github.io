@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Benjamín Cáceres | Portafolio web</title>
+<meta name="description" content="Portafolio de Benjamín Cáceres: proyectos web, servicios y contacto.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: una columna de lectura (presentación → proyectos → servicios → contacto); cada proyecto muestra su ficha a un lado y capturas de computador y celular al otro. */
+:root{
+  --bg:#EDF1EE;
+  --surface:#FAFBFA;
+  --fg:#14211C;
+  --muted:#4F6159;
+  --line:#CBD6D0;
+  --accent:#0B7A5A;
+  --accent-fg:#FFFFFF;
+  --mark:#F4D35E;
+  --display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --body:'Instrument Sans','Segoe UI',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F1713;--surface:#17221D;--fg:#E7EFEA;--muted:#9CB0A6;--line:#2B3A33;--accent:#4FD1A5;--accent-fg:#0F1713;--mark:#B8962B;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1713;--surface:#17221D;--fg:#E7EFEA;--muted:#9CB0A6;--line:#2B3A33;--accent:#4FD1A5;--accent-fg:#0F1713;--mark:#B8962B;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;
+  padding-block:0 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin-inline:auto}
+h1,h2,h3{font-family:var(--display);line-height:1.1;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* nav */
+nav{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;align-items:center;padding-block:20px;border-bottom:1px solid var(--line)}
+nav .brand{font-family:var(--display);font-weight:700;font-size:20px}
+nav ul{display:flex;flex-wrap:wrap;gap:4px 20px;list-style:none;margin:0;padding:0}
+nav a{color:var(--fg);text-decoration:none;font-weight:500;font-size:15px}
+nav a:hover{color:var(--accent)}
+
+/* intro */
+.intro{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:40px;padding-block:72px 64px;align-items:end}
+.intro h1{font-size:clamp(40px,7vw,72px);font-weight:700;letter-spacing:-.02em}
+.intro h1 span{background:linear-gradient(transparent 62%,var(--mark) 62% 92%,transparent 92%)}
+.intro .lead{margin-top:24px;font-size:19px;max-width:34em;color:var(--fg)}
+.facts{display:grid;gap:0;margin:0;border-top:1px solid var(--line)}
+.facts div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.facts dt{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.facts dd{margin:0}
+
+/* sections */
+section{padding-block:56px;border-top:1px solid var(--line)}
+section>.wrap>header{display:grid;gap:8px;margin-bottom:36px;max-width:40em}
+section h2{font-size:clamp(28px,4.5vw,40px);letter-spacing:-.01em}
+section header p{color:var(--muted)}
+
+/* projects */
+.project{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:40px;padding-block:40px;border-top:1px dashed var(--line)}
+.project:first-of-type{border-top:0;padding-top:0}
+.project h3{font-size:28px;margin-block:10px 8px}
+.tag{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:3px 9px;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:var(--surface)}
+.tag.status{border-color:var(--accent);color:var(--accent)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.qa{display:grid;gap:14px;margin:20px 0}
+.qa dt{font-family:var(--mono);font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.qa dd{margin:2px 0 0}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.btn{display:inline-block;padding:10px 18px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none;border:1.5px solid var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-fg)}
+.btn.ghost{color:var(--accent);background:transparent}
+
+/* screenshots (capturas) */
+.shots{display:grid;grid-template-columns:minmax(0,1fr) 108px;gap:16px;align-items:end;min-width:0}
+figure{margin:0;min-width:0}
+figcaption{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:8px;letter-spacing:.04em}
+.screen{background:var(--surface);border:1px solid var(--line);overflow:hidden;position:relative}
+.desktop{border-radius:8px}
+.desktop .bar{display:flex;gap:5px;padding:8px 10px;border-bottom:1px solid var(--line);background:var(--bg)}
+.desktop .bar i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.desktop .page{aspect-ratio:16/10}
+.phone{border-radius:16px;border:3px solid var(--fg)}
+.phone .page{aspect-ratio:9/17}
+.page{display:grid;align-content:start;gap:8px;padding:12px;font-size:10px;line-height:1.3;overflow:hidden}
+.phone .page{padding:8px;font-size:8px;gap:6px}
+.page .hd{display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.page .big{font-family:var(--display);font-weight:700;font-size:20px;line-height:1.05}
+.phone .page .big{font-size:13px}
+.page .blk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.phone .page .blk{grid-template-columns:1fr}
+.page .card{background:var(--bg);border-radius:4px;padding:6px 7px;min-width:0}
+.page .card b{display:block}
+.page .pill{display:inline-block;background:var(--accent);color:var(--accent-fg);border-radius:999px;padding:2px 8px;width:max-content}
+.page .row{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-block:3px}
+.page .done{text-decoration:line-through;color:var(--muted)}
+
+/* services */
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.service{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;display:grid;gap:8px;align-content:start}
+.service h3{font-size:21px}
+.service p{color:var(--muted);font-size:16px}
+.service .meta{font-family:var(--mono);font-size:12.5px;color:var(--accent);letter-spacing:.04em}
+.note{margin-top:28px;padding:16px 18px;border-left:4px solid var(--mark);background:var(--surface);border-radius:0 8px 8px 0;max-width:46em;font-size:16px}
+
+/* contact */
+.contact{display:grid;gap:18px;max-width:40em}
+.mail{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.mail code{font-family:var(--mono);font-size:16px;background:var(--surface);border:1px solid var(--line);padding:10px 14px;border-radius:8px;user-select:all;overflow-wrap:anywhere}
+.mail button{font:inherit;font-weight:600;font-size:15px;cursor:pointer}
+.contact ul{margin:0;padding-left:20px;color:var(--muted);font-size:16px}
+footer{padding-top:32px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+
+@media (max-width:820px){
+  .intro,.project{grid-template-columns:minmax(0,1fr);gap:28px}
+  .intro{padding-block:48px 40px}
+}
+@media (max-width:420px){.shots{grid-template-columns:minmax(0,1fr) 90px;gap:10px}.facts div{grid-template-columns:1fr;gap:0}}
+@media (prefers-reduced-motion:no-preference){.btn{transition:transform .15s}.btn:hover{transform:translateY(-2px)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav aria-label="Principal">
+    <span class="brand">Benjamín Cáceres</span>
+    <ul>
+      <li><a href="#presentacion">Presentación</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <header class="intro" id="presentacion">
+    <div>
+      <p class="eyebrow">Desarrollo web junior</p>
+      <h1 style="margin-top:12px">Hola, soy <span>Benjamín Cáceres</span>. Hago páginas web sencillas y claras.</h1>
+      <p class="lead">Estoy aprendiendo desarrollo web con HTML, CSS y JavaScript. Me gusta que una página se vea ordenada, cargue rápido y se lea bien en el celular.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Aprendiendo</dt><dd>HTML, CSS, JavaScript y Git</dd></div>
+      <div><dt>Puedo hacer</dt><dd>Páginas informativas y ajustes de diseño</dd></div>
+      <div><dt>Idiomas</dt><dd>Español, inglés básico</dd></div>
+      <div><dt>Estado</dt><dd>Disponible para proyectos pequeños</dd></div>
+    </dl>
+  </header>
+</div>
+
+<section id="proyectos">
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">Proyectos</p>
+      <h2>Tres proyectos, con lo que hice y lo que mejoraría</h2>
+      <p>Los tres los hice yo. Cada ficha indica si el contenido es ficticio o de ejemplo.</p>
+    </header>
+
+    <!-- Proyecto 1 -->
+    <article class="project">
+      <div>
+        <div class="tags"><span class="tag status">Práctica</span><span class="tag">Contenido ficticio</span></div>
+        <h3>Página para una cafetería</h3>
+        <p>Diseñé y desarrollé una página adaptable a celular con menú, horario y formulario de contacto. El negocio y el contenido son ficticios.</p>
+        <dl class="qa">
+          <div><dt>Problema que resuelve</dt><dd>Un negocio pequeño necesita que sus clientes vean el menú y el horario sin tener que preguntar.</dd></div>
+          <div><dt>Qué hice yo</dt><dd>Todo el diseño, la maquetación, el menú por categorías y la validación del formulario.</dd></div>
+          <div><dt>Tecnologías</dt><dd class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></dd></div>
+          <div><dt>Qué mejoraría</dt><dd>Agregar fotos optimizadas y hacer que el formulario envíe mensajes de verdad.</dd></div>
+        </dl>
+        <div class="links">
+          <a class="btn primary" href="https://eudifer.github.io/Cafeteria/" target="_blank" rel="noopener">Ver demo</a>
+          <a class="btn ghost" href="https://github.com/eudifer/Cafeteria" target="_blank" rel="noopener">Código en GitHub</a>
+        </div>
+      </div>
+      <div class="shots">
+        <figure>
+          <div class="screen desktop" role="img" aria-label="Captura en computador: portada de la cafetería con menú y horario">
+            <div class="bar"><i></i><i></i><i></i></div>
+            <div class="page">
+              <div class="hd"><span>Café Ejemplo</span><span>Menú · Horario · Contacto</span></div>
+              <div class="big">Café de la mañana, sin apuros.</div>
+              <div class="blk">
+                <div class="card"><b>Espresso</b>$1.800</div>
+                <div class="card"><b>Latte</b>$2.600</div>
+                <div class="card"><b>Té chai</b>$2.400</div>
+              </div>
+              <div class="row"><span>Lun a Vie</span><span>8:00 – 19:00</span></div>
+            </div>
+          </div>
+          <figcaption>Computador</figcaption>
+        </figure>
+        <figure>
+          <div class="screen phone" role="img" aria-label="Captura en celular: portada de la cafetería en una columna">
+            <div class="page">
+              <div class="hd"><span>Café Ejemplo</span><span>☰</span></div>
+              <div class="big">Café de la mañana, sin apuros.</div>
+              <div class="card"><b>Espresso</b>$1.800</div>
+              <div class="card"><b>Latte</b>$2.600</div>
+              <span class="pill">Contacto</span>
+            </div>
+          </div>
+          <figcaption>Celular</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- Proyecto 2 -->
+    <article class="project">
+      <div>
+        <div class="tags"><span class="tag status">Personal</span></div>
+        <h3>Organizador de tareas</h3>
+        <p>Una aplicación pequeña para anotar tareas del colegio, marcarlas como hechas y filtrarlas.</p>
+        <dl class="qa">
+          <div><dt>Problema que resuelve</dt><dd>Se me olvidaban las entregas. Quería una lista simple que se abriera rápido.</dd></div>
+          <div><dt>Qué hice yo</dt><dd>Escribí la lógica para agregar, completar, borrar y filtrar tareas, y el contador de pendientes.</dd></div>
+          <div><dt>Tecnologías</dt><dd class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></dd></div>
+          <div><dt>Qué mejoraría</dt><dd>Guardar las tareas entre visitas, añadir fechas de entrega y ordenarlas por urgencia.</dd></div>
+        </dl>
+        <div class="links">
+          <a class="btn primary" href="https://eudifer.github.io/Organizador-De-Tareas/" target="_blank" rel="noopener">Ver demo</a>
+          <a class="btn ghost" href="https://github.com/eudifer/Organizador-De-Tareas" target="_blank" rel="noopener">Código en GitHub</a>
+        </div>
+      </div>
+      <div class="shots">
+        <figure>
+          <div class="screen desktop" role="img" aria-label="Captura en computador: lista de tareas con tres elementos">
+            <div class="bar"><i></i><i></i><i></i></div>
+            <div class="page">
+              <div class="hd"><span>Mis tareas</span><span>2 pendientes</span></div>
+              <div class="big">Esta semana</div>
+              <div class="row"><span>Informe de ciencias</span><span>Pendiente</span></div>
+              <div class="row"><span>Guía de matemática</span><span>Pendiente</span></div>
+              <div class="row done"><span>Lectura del libro</span><span>Hecha</span></div>
+            </div>
+          </div>
+          <figcaption>Computador</figcaption>
+        </figure>
+        <figure>
+          <div class="screen phone" role="img" aria-label="Captura en celular: lista de tareas en una columna">
+            <div class="page">
+              <div class="hd"><span>Mis tareas</span><span>2</span></div>
+              <div class="big">Esta semana</div>
+              <div class="card"><b>Informe de ciencias</b>Pendiente</div>
+              <div class="card"><b>Guía de matemática</b>Pendiente</div>
+              <div class="card done"><b>Lectura</b>Hecha</div>
+            </div>
+          </div>
+          <figcaption>Celular</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- Proyecto 3 -->
+    <article class="project">
+      <div>
+        <div class="tags"><span class="tag status">Práctica</span><span class="tag">Contenido de ejemplo</span></div>
+        <h3>Sitio de un club de lectura</h3>
+        <p>Página informativa con la próxima reunión, un calendario y los libros del mes. El club y los libros son de ejemplo.</p>
+        <dl class="qa">
+          <div><dt>Problema que resuelve</dt><dd>Los miembros del club no tenían un lugar único con fechas y lecturas.</dd></div>
+          <div><dt>Qué hice yo</dt><dd>Hice todo: la estructura, el diseño adaptable a celular, los textos y el cálculo automático de la próxima reunión con JavaScript.</dd></div>
+          <div><dt>Tecnologías</dt><dd class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></dd></div>
+          <div><dt>Qué mejoraría</dt><dd>Permitir que cada reunión tenga su propio libro y agregar un formulario para proponer lecturas.</dd></div>
+        </dl>
+        <div class="links">
+          <a class="btn primary" href="https://eudifer.github.io/Club-Lectura/" target="_blank" rel="noopener">Ver demo</a>
+          <a class="btn ghost" href="https://github.com/eudifer/Club-Lectura" target="_blank" rel="noopener">Código en GitHub</a>
+        </div>
+      </div>
+      <div class="shots">
+        <figure>
+          <div class="screen desktop" role="img" aria-label="Captura en computador: próximas reuniones del club de lectura">
+            <div class="bar"><i></i><i></i><i></i></div>
+            <div class="page">
+              <div class="hd"><span>Club de Lectura</span><span>Reuniones · Libros</span></div>
+              <div class="big">Próxima reunión: sábado</div>
+              <div class="blk">
+                <div class="card"><b>Libro del mes</b>Rebelión en la granja</div>
+                <div class="card"><b>Lugar</b>Biblioteca</div>
+                <div class="card"><b>Hora</b>16:00</div>
+              </div>
+              <span class="pill">Ver calendario</span>
+            </div>
+          </div>
+          <figcaption>Computador</figcaption>
+        </figure>
+        <figure>
+          <div class="screen phone" role="img" aria-label="Captura en celular: club de lectura en una columna">
+            <div class="page">
+              <div class="hd"><span>Club de Lectura</span><span>☰</span></div>
+              <div class="big">Próxima reunión: sábado</div>
+              <div class="card"><b>Libro del mes</b>Rebelión en la granja</div>
+              <div class="card"><b>Hora</b>16:00</div>
+              <span class="pill">Calendario</span>
+            </div>
+          </div>
+          <figcaption>Celular</figcaption>
+        </figure>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">Servicios</p>
+      <h2>Lo que puedo entregar</h2>
+      <p>Trabajos pequeños y bien definidos, con plazos que sé cumplir.</p>
+    </header>
+    <div class="services">
+      <div class="service">
+        <h3>Página informativa sencilla</h3>
+        <p>Una página con tu presentación, horarios, ubicación y datos de contacto, que se vea bien en celular.</p>
+        <span class="meta">Entrega: 1 a 2 semanas</span>
+      </div>
+      <div class="service">
+        <h3>Ajustes de diseño web</h3>
+        <p>Cambios de colores, tipografías y espaciados, y arreglos para que tu página se lea mejor en el celular.</p>
+        <span class="meta">Entrega: 2 a 5 días</span>
+      </div>
+      <div class="service">
+        <h3>Formulario de contacto básico</h3>
+        <p>Un formulario claro con validación de campos. La conexión con un servicio de correo se define contigo antes de empezar.</p>
+        <span class="meta">Entrega: 1 semana</span>
+      </div>
+    </div>
+    <p class="note">No hago tiendas en línea, pagos ni sistemas con usuarios. Si tu proyecto necesita algo de eso, te lo digo desde el principio.</p>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">Contacto</p>
+      <h2>Escríbeme</h2>
+      <p>Cuéntame qué necesitas, para qué es y para cuándo. Respondo en un par de días.</p>
+    </header>
+    <div class="contact">
+      <div class="mail">
+        <code id="correo">benjamincaceres978@gmail.com</code>
+        <button class="btn ghost" id="copiar" type="button">Copiar correo</button>
+      </div>
+      <ul>
+        <li>Perfil de GitHub: <a href="https://github.com/eudifer" target="_blank" rel="noopener">github.com/eudifer</a></li>
+        <li>Respondo de lunes a domingo.</li>
+      </ul>
+    </div>
+    <footer style="margin-top:48px">© 2026 Benjamín Cáceres. Los proyectos de práctica usan contenido ficticio.</footer>
+  </div>
+</section>
+
+<script>
+(function(){
+  var btn=document.getElementById('copiar'), code=document.getElementById('correo');
+  function select(){var r=document.createRange();r.selectNodeContents(code);var s=getSelection();s.removeAllRanges();s.addRange(r)}
+  btn.addEventListener('click',function(){
+    var done=function(t){btn.textContent=t;setTimeout(function(){btn.textContent='Copiar correo'},2000)};
+    try{
+      navigator.clipboard.writeText(code.textContent).then(function(){done('Copiado')},function(){select();done('Seleccionado')});
+    }catch(e){select();done('Seleccionado')}
+  });
+})();
+</script>
+</body>
+</html>
